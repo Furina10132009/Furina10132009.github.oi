@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>张慧的生日祝福</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Microsoft Yahei", sans-serif;
+      background-color: #f0f4f7;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+      transition: background-color 0.5s ease;
+    }
+
+    /* 花的样式 - 从角落生长的效果 */
+    .flower {
+      position: absolute;
+      opacity: 0.7;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .wisteria {
+      width: 80px;
+      height: 120px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 120"><path d="M40,10 Q20,30 40,50 Q60,30 40,10" stroke="purple" stroke-width="2" fill="none"/><path d="M40,50 Q20,70 40,90 Q60,70 40,50" stroke="purple" stroke-width="2" fill="none"/><circle cx="40" cy="10" r="5" fill="purple"/><circle cx="40" cy="50" r="5" fill="purple"/><circle cx="40" cy="90" r="5" fill="purple"/></svg>') no-repeat center;
+    }
+
+    .blue-snowflake {
+      width: 60px;
+      height: 60px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60"><circle cx="30" cy="30" r="25" fill="blue"/><path d="M30,10 L30,50" stroke="lightblue" stroke-width="2"/><path d="M10,30 L50,30" stroke="lightblue" stroke-width="2"/><path d="M20,20 L40,40" stroke="lightblue" stroke-width="2"/><path d="M40,20 L20,40" stroke="lightblue" stroke-width="2"/></svg>') no-repeat center;
+    }
+
+    .hydrangea {
+      width: 70px;
+      height: 70px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 70"><circle cx="35" cy="35" r="30" fill="blue"/><circle cx="35" cy="35" r="25" fill="white"/><circle cx="35" cy="35" r="20" fill="blue"/></svg>') no-repeat center;
+    }
+
+    .abelia {
+      width: 50px;
+      height: 50px;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><circle cx="25" cy="25" r="20" fill="white"/><path d="M25,10 L25,40" stroke="green" stroke-width="2"/><circle cx="15" cy="15" r="3" fill="yellow"/><circle cx="35" cy="15" r="3" fill="yellow"/><circle cx="15" cy="35" r="3" fill="yellow"/><circle cx="35" cy="35" r="3" fill="yellow"/></svg>') no-repeat center;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 90%;
+      transition: all 0.5s ease;
+    }
+
+    h1 {
+      color: #5a6b87;
+      font-size: 2.5em;
+      margin-bottom: 30px;
+    }
+
+    .btn {
+      background-color: #a0aec0;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1.2em;
+      border-radius: 5px;
+      cursor: pointer;
+      margin: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #7b8fa1;
+    }
+
+    .text-container {
+      margin: 20px 0;
+      min-height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .text {
+      font-size: 1.5em;
+      color: #5a6b87;
+      white-space: pre-wrap;
+    }
+
+    .image-container {
+      margin-top: 20px;
+      max-width: 100%;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 5px;
+      transition: transform 0.3s ease;
+    }
+
+    .typing {
+      overflow: hidden;
+      border-right: 2px solid #5a6b87;
+      white-space: nowrap;
+      margin: 0 auto;
+      animation: typing 2s steps(20, end), blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #5a6b87; }
+    }
+
+    .golden-text {
+      font-family: "STKaiti", "KaiTi", serif;
+      font-size: 2em;
+      color: gold;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      margin: 10px 0;
+    }
+
+    .happy-birthday {
+      font-size: 1.8em;
+      color: #ff6b6b;
+      margin-top: 10px;
+    }
+
+    /* 信封样式 */
+    .envelope {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 300px;
+      height: 200px;
+      background-color: #6b7abb;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.5s ease;
+    }
+
+    .envelope.show {
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .envelope-text {
+      color: white;
+      font-size: 1.5em;
+      margin: 10px;
+    }
+
+    /* 图片查看器样式 */
+    .image-viewer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      z-index: 20;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .viewer-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .viewer-image {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #5a6b87;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .rotate-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #5a6b87;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .zoom-controls {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      display: flex;
+      gap: 5px;
+    }
+
+    .zoom-btn {
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #5a6b87;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    /* 新增：下一张按钮样式 */
+    .next-btn {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #5a6b87;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="content" id="content">
+    <h1>张慧好</h1>
+    <button class="btn" id="startBtn">开始</button>
+  </div>
+
+  <div class="envelope" id="envelope">
+    <div class="envelope-text">点击打开信封</div>
+  </div>
+
+  <div class="image-viewer" id="imageViewer">
+    <div class="viewer-content">
+      <img src="" alt="查看图片" class="viewer-image" id="viewerImage">
+      <button class="close-btn" id="closeBtn">×</button>
+      <button class="rotate-btn" id="rotateBtn">旋转</button>
+      <div class="zoom-controls">
+        <button class="zoom-btn" id="zoomInBtn">+</button>
+        <button class="zoom-btn" id="zoomOutBtn">-</button>
+      </div>
+      <!-- 新增：下一张按钮 -->
+      <button class="next-btn" id="nextBtn">下一张</button>
+    </div>
+  </div>
+
+  <script>
+    // 生成花的装饰 - 从角落生长的效果
+    function createFlowers() {
+      const flowerTypes = [
+        { type: 'wisteria', count: 5 },
+        { type: 'blue-snowflake', count: 8 },
+        { type: 'hydrangea', count: 4 },
+        { type: 'abelia', count: 6 }
+      ];
+      
+      // 让花主要分布在角落
+      const positions = [
+        {left: '0%', top: '0%', rotate: '0deg'},
+        {left: '90%', top: '0%', rotate: '90deg'},
+        {left: '0%', top: '90%', rotate: '270deg'},
+        {left: '90%', top: '90%', rotate: '180deg'},
+        {left: '10%', top: '20%', rotate: '30deg'},
+        {left: '80%', top: '30%', rotate: '60deg'},
+        {left: '20%', top: '80%', rotate: '300deg'},
+        {left: '70%', top: '70%', rotate: '330deg'}
+      ];
+      
+      flowerTypes.forEach(flowerType => {
+        for (let i = 0; i < flowerType.count; i++) {
+          const flower = document.createElement('div');
+          flower.className = `flower ${flowerType.type}`;
+          
+          // 随机选择角落位置
+          const pos = positions[Math.floor(Math.random() * positions.length)];
+          flower.style.left = pos.left;
+          flower.style.top = pos.top;
+          flower.style.transform = `rotate(${pos.rotate})`;
+          
+          document.body.appendChild(flower);
+        }
+      });
+    }
+
+    createFlowers();
+
+    // 页面交互逻辑
+    const content = document.getElementById('content');
+    const startBtn = document.getElementById('startBtn');
+    const envelope = document.getElementById('envelope');
+    const imageViewer = document.getElementById('imageViewer');
+    const viewerImage = document.getElementById('viewerImage');
+    const closeBtn = document.getElementById('closeBtn');
+    const rotateBtn = document.getElementById('rotateBtn');
+    const zoomInBtn = document.getElementById('zoomInBtn');
+    const zoomOutBtn = document.getElementById('zoomOutBtn');
+    const nextBtn = document.getElementById('nextBtn'); // 新增：下一张按钮
+
+    let rotation = 0;
+    let scale = 1;
+    let currentImgIndex = 0; // 记录当前显示的图片索引
+    // 定义手写图片数组（使用你提供的截图中手写图文件名）
+    const letterImgs = [
+      "57f43895E2D7D29A41f4442EBC161.jpg",
+      "141E59AABFE48E0A7ADE0B65388FB47.jpg",
+      "446EAFF583E2631FC02B21CFE963164D.jpg",
+      "464C935DB30AB7246399D15535836C98.jpg",
+      "71840201E5F6F2AEFF0762D29AD5FF08.jpg",
+      "C0010CC2241A0C7FEA4BB83544906CE9.jpg",
+      "D88965F25375B2B16745E327223B14CF.jpg"
+    ];
+
+    startBtn.addEventListener('click', () => {
+      showNextPage("哈哈被我恶搞了吧", "继续");
+    });
+
+    function showNextPage(text, btnText) {
+      content.innerHTML
